@@ -22,8 +22,7 @@ public class FallbackReload implements CommandExecutor, TabCompleter {
         try {
             long mss = System.currentTimeMillis();
 
-            Main.getPlugin().saveDefaultConfig();
-            Main.getPlugin().reloadConfig();
+            Main.getInstance().getConfiguration().reload();
 
             sender.sendMessage(UChat.component("&6Successfully reloaded the fallback configuration in &a" + (System.currentTimeMillis()-mss) + "&ams&6!"));
             Spigot.playSound(sender, Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);

@@ -2,7 +2,8 @@ package net.cybercake.fallback.listeners;
 
 import net.cybercake.fallback.Configuration;
 import net.cybercake.fallback.Main;
-import net.kyori.adventure.text.Component;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -15,15 +16,20 @@ public class JoinLeaveEvent implements Listener {
         Configuration configuration = Main.getInstance().getConfiguration();
         if(!configuration.disableJoinLeaveEvents()) return;
 
-        event.joinMessage(Component.empty());
-        event.getPlayer().teleport(configuration.getSpawn());
+        event.joinMessage(null);
+
+        Player player = event.getPlayer();
+        player.setGameMode(GameMode.SPECTATOR);
+        player.teleport(configuration.getSpawn());
+
+        Main.getInstance().send(player, configuration.getConnectTo());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         if(!Main.getInstance().getConfiguration().disableJoinLeaveEvents()) return;
 
-        event.quitMessage(Component.empty());
+        event.quitMessage(null);
     }
 
 }

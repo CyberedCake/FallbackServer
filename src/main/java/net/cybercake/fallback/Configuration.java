@@ -34,7 +34,7 @@ public class Configuration {
             this.spawn = new Location(Main.getPlugin().getServer().getWorlds().get(0), 0.0, 100.0, 0.0, 0, 0);
         }
 
-        this.joinLeaveEvents = config.getBoolean("disable.joinLeaveEvents");
+        this.joinLeaveEvents = config.getBoolean("disable.joinLeaveMessages");
         this.chat = config.getBoolean("disable.chat");
         this.movement = config.getBoolean("disable.movement");
     }
