@@ -2,6 +2,7 @@ package net.cybercake.fallback.listeners;
 
 import net.cybercake.fallback.Configuration;
 import net.cybercake.fallback.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,11 +15,14 @@ public class JoinLeaveEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Configuration configuration = Main.getInstance().getConfiguration();
+
+        Player player = event.getPlayer();
+        if(configuration.disableVisibility()) Bukkit.getOnlinePlayers().forEach(player1 -> player.hidePlayer(Main.getPlugin(), player1));
+
         if(!configuration.disableJoinLeaveEvents()) return;
 
         event.joinMessage(null);
 
-        Player player = event.getPlayer();
         player.setGameMode(GameMode.SPECTATOR);
         player.teleport(configuration.getSpawn());
 

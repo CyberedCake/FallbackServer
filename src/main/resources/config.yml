@@ -1,5 +1,5 @@
 connectTo: "server"
-connectionInterval: 100 # in ticks, requires server restart
+connectionInterval: 200 # in ticks, requires server restart
 
 spawnAt:
   world: "world"
@@ -13,3 +13,4 @@ disable:
   joinLeaveMessages: true
   chat: true
   movement: true
+  playerVisibility: true

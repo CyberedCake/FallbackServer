@@ -16,6 +16,7 @@ public class Configuration {
     private boolean joinLeaveEvents;
     private boolean chat;
     private boolean movement;
+    private boolean playerVisibility;
 
     public void reload() {
         Main.getPlugin().saveDefaultConfig();
@@ -37,13 +38,17 @@ public class Configuration {
         this.joinLeaveEvents = config.getBoolean("disable.joinLeaveMessages");
         this.chat = config.getBoolean("disable.chat");
         this.movement = config.getBoolean("disable.movement");
+        this.playerVisibility = config.getBoolean("disable.playerVisibility");
     }
 
     public String getConnectTo() { return connectTo; }
     public int getConnectionInterval() { return connectionInterval; }
+
     public Location getSpawn() { return spawn; }
+
     public boolean disableJoinLeaveEvents() { return joinLeaveEvents; }
     public boolean disableChat() { return chat; }
     public boolean disableMovement() { return movement; }
+    public boolean disableVisibility() { return playerVisibility; }
 
 }
