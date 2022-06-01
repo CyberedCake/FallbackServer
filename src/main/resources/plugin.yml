@@ -1,0 +1,8 @@
+name: FallbackServer
+version: '${version}'
+main: net.cybercake.fallback.Main
+api-version: 1.18
+prefix: FallbackServer
+authors: [ CyberedCake ]
+description: The fallback server I use
+website: https://github.com/CyberedCake/FallbackServer
