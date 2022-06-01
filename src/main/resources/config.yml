@@ -1,0 +1,15 @@
+connectTo: "server"
+connectionInterval: 100 # in ticks, requires server restart
+
+spawnAt:
+  world: "world"
+  x: 0.00
+  y: 100.00
+  z: 0.00
+  yaw: 0.00
+  pitch: 0.00
+
+disable:
+  joinLeaveMessages: true
+  chat: true
+  movement: true

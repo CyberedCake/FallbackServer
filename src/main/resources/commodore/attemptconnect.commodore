@@ -1,0 +1,3 @@
+attemptconnect {
+  server brigadier:string single_word;
+}
