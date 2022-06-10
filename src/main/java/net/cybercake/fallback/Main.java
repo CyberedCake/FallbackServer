@@ -12,6 +12,7 @@ import net.cybercake.fallback.listeners.ChatEvent;
 import net.cybercake.fallback.listeners.JoinLeaveEvent;
 import net.cybercake.fallback.listeners.MoveEvent;
 import net.cybercake.fallback.tasks.AttemptToSend;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
@@ -77,6 +78,7 @@ public final class Main extends Spigot {
     public @NotNull Configuration getConfiguration() { return configuration; }
 
     public void send(Player player, String server) {
+        player.sendMessage(StringUtils.repeat(" \n", 100));
         if(server.equalsIgnoreCase("$$configuration")) server = getConfiguration().getConnectTo();
         player.sendMessage(UChat.component("&6Sending you to &a" + server + "&6!"));
         try {

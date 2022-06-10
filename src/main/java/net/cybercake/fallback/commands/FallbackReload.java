@@ -24,7 +24,7 @@ public class FallbackReload implements CommandExecutor, TabCompleter {
 
             Main.getInstance().getConfiguration().reload();
 
-            sender.sendMessage(UChat.component("&6Successfully reloaded the fallback configuration in &a" + (System.currentTimeMillis()-mss) + "&ams&6!"));
+            sender.sendMessage(UChat.component("&aSuccessfully &7reloaded the fallback configuration in &b" + (System.currentTimeMillis()-mss) + "&bms&7!"));
             Spigot.playSound(sender, Sound.ENTITY_PLAYER_LEVELUP, 1F, 1F);
         } catch (Exception exception) {
             sender.sendMessage(UChat.component("&cAn error occurred whilst reloading the fallback configuration! &4" + exception));
