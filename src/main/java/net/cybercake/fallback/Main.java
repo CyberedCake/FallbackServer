@@ -80,7 +80,7 @@ public final class Main extends Spigot {
     public void send(Player player, String server) {
         player.sendMessage(StringUtils.repeat(" \n", 100));
         if(server.equalsIgnoreCase("$$configuration")) server = getConfiguration().getConnectTo();
-        player.sendMessage(UChat.component("&6Sending you to &a" + server + "&6!"));
+        player.sendMessage(UChat.component("&7Sending you to &b" + server + ""));
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(byteArrayOutputStream);
