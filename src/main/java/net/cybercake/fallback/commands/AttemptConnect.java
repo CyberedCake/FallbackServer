@@ -22,10 +22,10 @@ public class AttemptConnect implements CommandExecutor, TabCompleter {
         }
 
         if(args.length < 1) {
-            player.sendMessage(UChat.component("&7Attempting to connect you to default server &8(&b" + Main.getInstance().getConfiguration().getConnectTo() + "&8)&7..."));
+            player.sendMessage(UChat.component("&6Attempting to connect you to default server &2(&a" + Main.getInstance().getConfiguration().getConnectTo() + "&2)&6..."));
             Main.getInstance().send(player, "$$configuration");
         }else{
-            player.sendMessage(UChat.component("&7Attempting to connect you to &b" + args[0] + "&7..."));
+            player.sendMessage(UChat.component("&6Attempting to connect you to &a" + args[0] + "&6..."));
             Main.getInstance().send(player, args[0]);
         }
 
