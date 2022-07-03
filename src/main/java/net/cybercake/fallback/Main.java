@@ -2,10 +2,11 @@ package net.cybercake.fallback;
 
 import me.lucko.commodore.CommodoreProvider;
 import net.cybercake.cyberapi.CyberAPI;
-import net.cybercake.cyberapi.Log;
+import net.cybercake.cyberapi.basic.BetterStackTraces;
+import net.cybercake.cyberapi.basic.StringUtils;
+import net.cybercake.cyberapi.chat.Log;
 import net.cybercake.cyberapi.chat.UChat;
-import net.cybercake.cyberapi.exceptions.BetterStackTraces;
-import net.cybercake.cyberapi.instances.Spigot;
+import net.cybercake.cyberapi.settings.Settings;
 import net.cybercake.fallback.commands.AttemptConnect;
 import net.cybercake.fallback.commands.FallbackReload;
 import net.cybercake.fallback.listeners.ChatEvent;
@@ -17,12 +18,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-public final class Main extends Spigot {
+public final class Main extends CyberAPI {
 
     private static Main instance;
 
@@ -32,8 +34,15 @@ public final class Main extends Spigot {
     public void onEnable() {
         long mss = System.currentTimeMillis();
         instance = this;
-        CyberAPI.silenceLogs(true);
-        CyberAPI.initSpigot(this, true);
+
+        startCyberAPI(new Settings()
+                .name("Fallback")
+                .prefix("Fallback")
+                .checkForUpdates(false)
+                .silenced(true)
+                .showPrefixInLogs(true)
+                .build()
+        );
 
         configuration = new Configuration();
         Log.info("Loaded the configuration!");
@@ -77,8 +86,9 @@ public final class Main extends Spigot {
     public @NotNull Configuration getConfiguration() { return configuration; }
 
     public void send(Player player, String server) {
+        player.sendMessage(UChat.getClearedChat());
         if(server.equalsIgnoreCase("$$configuration")) server = getConfiguration().getConnectTo();
-        player.sendMessage(UChat.component("&6Sending you to &a" + server + "&6!"));
+        player.sendMessage(UChat.component("&7Sending you to &b" + server + ""));
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(byteArrayOutputStream);
@@ -86,7 +96,7 @@ public final class Main extends Spigot {
             out.writeUTF("Connect");
             out.writeUTF(server);
 
-            player.sendPluginMessage(Main.getPlugin(), "BungeeCord", byteArrayOutputStream.toByteArray());
+            player.sendPluginMessage(Main.getInstance(), "BungeeCord", byteArrayOutputStream.toByteArray());
 
             byteArrayOutputStream.close();
             out.close();
@@ -98,8 +108,7 @@ public final class Main extends Spigot {
 
     public static void registerCommandAndTab(String name, Object commandExecutor, boolean withCommodore) {
         try {
-            registerCommand(name, (CommandExecutor)commandExecutor);
-            registerTabCompleter(name, (TabCompleter)commandExecutor);
+            Main.getInstance().registerCommand(name, (CommandExecutor) commandExecutor);
             if(withCommodore) {
                 if(CommodoreProvider.isSupported()) {
                     Commodore.register(Bukkit.getPluginCommand(name), name);

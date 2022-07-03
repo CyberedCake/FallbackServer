@@ -1,6 +1,6 @@
 package net.cybercake.fallback;
 
-import net.cybercake.cyberapi.Log;
+import net.cybercake.cyberapi.chat.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -19,10 +19,10 @@ public class Configuration {
     private boolean playerVisibility;
 
     public void reload() {
-        Main.getPlugin().saveDefaultConfig();
-        Main.getPlugin().reloadConfig();
+        Main.getInstance().saveDefaultConfig();
+        Main.getInstance().reloadConfig();
 
-        FileConfiguration config = Main.getMainConfig();
+        FileConfiguration config = Main.getInstance().getMainConfig().values();
 
         this.connectTo = config.getString("connectTo");
         this.connectionInterval = config.getInt("connectionInterval");
@@ -32,7 +32,7 @@ public class Configuration {
             this.spawn = new Location(world, config.getDouble("spawnAt.x"), config.getDouble("spawnAt.y"), config.getDouble("spawnAt.z"), config.getInt("spawnAt.yaw"), config.getInt("spawnAt.pitch"));
         }else{
             Log.warn("You have put an invalid world in your configuration file! Set to default values for now...");
-            this.spawn = new Location(Main.getPlugin().getServer().getWorlds().get(0), 0.0, 100.0, 0.0, 0, 0);
+            this.spawn = new Location(Main.getInstance().getServer().getWorlds().get(0), 0.0, 100.0, 0.0, 0, 0);
         }
 
         this.joinLeaveEvents = config.getBoolean("disable.joinLeaveMessages");

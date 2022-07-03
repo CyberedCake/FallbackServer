@@ -17,7 +17,7 @@ public class JoinLeaveEvent implements Listener {
         Configuration configuration = Main.getInstance().getConfiguration();
 
         Player player = event.getPlayer();
-        if(configuration.disableVisibility()) Bukkit.getOnlinePlayers().forEach(player1 -> player.hidePlayer(Main.getPlugin(), player1));
+        if(configuration.disableVisibility()) Bukkit.getOnlinePlayers().forEach(player1 -> player.hidePlayer(Main.getInstance(), player1));
 
         if(!configuration.disableJoinLeaveEvents()) return;
 

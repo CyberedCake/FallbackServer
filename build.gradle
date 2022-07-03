@@ -21,10 +21,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT'
 
-    implementation 'com.github.CyberedCake:CyberAPI:v2.1.11'
-    implementation 'me.lucko:commodore:1.13'
+    implementation 'com.github.CyberedCake:CyberAPI:v3.0.3-spigot'
+    implementation 'me.lucko:commodore:2.0'
 }
 
 shadowJar {
