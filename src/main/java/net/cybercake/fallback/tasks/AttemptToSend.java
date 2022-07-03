@@ -9,7 +9,7 @@ public class AttemptToSend implements Runnable {
     public void run() {
         boolean disableVisibility = Main.getInstance().getConfiguration().disableVisibility();
         Bukkit.getOnlinePlayers().forEach(player -> {
-            if(disableVisibility) Bukkit.getOnlinePlayers().forEach(player1 -> player.hidePlayer(Main.getPlugin(), player1));
+            if(disableVisibility) Bukkit.getOnlinePlayers().forEach(player1 -> player.hidePlayer(Main.getInstance(), player1));
 
             Main.getInstance().send(player, "$$configuration");
         });
