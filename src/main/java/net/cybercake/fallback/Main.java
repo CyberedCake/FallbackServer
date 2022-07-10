@@ -88,7 +88,7 @@ public final class Main extends CyberAPI {
     public void send(Player player, String server) {
         player.sendMessage(UChat.getClearedChat());
         if(server.equalsIgnoreCase("$$configuration")) server = getConfiguration().getConnectTo();
-        player.sendMessage(UChat.component("&6Sending you to &a" + server + "&6!"));
+        player.sendMessage(UChat.component("&7Sending you to &b" + server + ""));
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(byteArrayOutputStream);
