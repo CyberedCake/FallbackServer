@@ -1,6 +1,6 @@
 package net.cybercake.fallback;
 
-import net.cybercake.cyberapi.chat.Log;
+import net.cybercake.cyberapi.spigot.chat.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

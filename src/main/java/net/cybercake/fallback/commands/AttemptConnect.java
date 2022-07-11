@@ -1,22 +1,28 @@
 package net.cybercake.fallback.commands;
 
-import net.cybercake.cyberapi.chat.UChat;
-import net.cybercake.cyberapi.chat.UTabComp;
+import net.cybercake.cyberapi.spigot.chat.UChat;
+import net.cybercake.cyberapi.spigot.chat.UTabComp;
+import net.cybercake.cyberapi.spigot.server.commands.Command;
+import net.cybercake.cyberapi.spigot.server.commands.CommandInformation;
 import net.cybercake.fallback.Main;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AttemptConnect implements CommandExecutor, TabCompleter {
+public class AttemptConnect extends Command {
+
+    public AttemptConnect() {
+        super(
+                newCommand("attemptconnect")
+                        .setUsage("&6/&aattemptconnect <server>")
+                        .setDescription("Attempts to connect you to a certain server.")
+                        .setCommodore(true)
+        );
+    }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean perform(@net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull CommandSender sender, @net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull String command, CommandInformation information, String[] args) {
         if(!(sender instanceof Player player)) {
             sender.sendMessage(UChat.component("&cOnly in-game players can use this command!")); return true;
         }
@@ -33,8 +39,9 @@ public class AttemptConnect implements CommandExecutor, TabCompleter {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public List<String> tab(@net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull CommandSender sender, @net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull String command, CommandInformation information, String[] args) {
         if(args.length == 1) return UTabComp.tabCompletionsSearch(args[0], List.of(Main.getInstance().getConfiguration().getConnectTo()));
         return UTabComp.emptyList;
     }
+
 }

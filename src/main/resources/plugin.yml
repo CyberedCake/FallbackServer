@@ -1,19 +1,8 @@
 name: FallbackServer
-version: '1.0.0'
+version: '1.2'
 main: net.cybercake.fallback.Main
 api-version: 1.18
 prefix: FallbackServer
 authors: [ CyberedCake ]
 description: Put this in any Bungeecord network fallback server and it will attempt to automatically reconnect to the main server
 website: https://github.com/CyberedCake/FallbackServer/releases
-
-
-commands:
-  fallbackreload:
-    description: Reloads the configuration for FallbackServer
-    permission: fallbackserver.reload
-    usage: /fallbackreload
-  attemptconnect:
-    description: Attempts to connect you to a different server instead of the default one, unless no arguments are defined
-    permission: fallbackserver.attemptconnect
-    usage: /attemptconnect [server]

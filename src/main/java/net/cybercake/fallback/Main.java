@@ -1,14 +1,12 @@
 package net.cybercake.fallback;
 
+import me.lucko.commodore.Commodore;
 import me.lucko.commodore.CommodoreProvider;
-import net.cybercake.cyberapi.CyberAPI;
-import net.cybercake.cyberapi.basic.BetterStackTraces;
-import net.cybercake.cyberapi.basic.StringUtils;
-import net.cybercake.cyberapi.chat.Log;
-import net.cybercake.cyberapi.chat.UChat;
-import net.cybercake.cyberapi.settings.Settings;
-import net.cybercake.fallback.commands.AttemptConnect;
-import net.cybercake.fallback.commands.FallbackReload;
+import net.cybercake.cyberapi.common.builders.settings.Settings;
+import net.cybercake.cyberapi.spigot.CyberAPI;
+import net.cybercake.cyberapi.spigot.basic.BetterStackTraces;
+import net.cybercake.cyberapi.spigot.chat.Log;
+import net.cybercake.cyberapi.spigot.chat.UChat;
 import net.cybercake.fallback.listeners.ChatEvent;
 import net.cybercake.fallback.listeners.JoinLeaveEvent;
 import net.cybercake.fallback.listeners.MoveEvent;
@@ -16,9 +14,7 @@ import net.cybercake.fallback.tasks.AttemptToSend;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
@@ -32,27 +28,22 @@ public final class Main extends CyberAPI {
 
     @Override
     public void onEnable() {
-        long mss = System.currentTimeMillis();
-        instance = this;
-
-        startCyberAPI(new Settings()
+        startCyberAPI(Settings.builder()
                 .name("Fallback")
                 .prefix("Fallback")
                 .checkForUpdates(false)
-                .silenced(true)
+                .muteStartMessage(true)
                 .showPrefixInLogs(true)
                 .build()
         );
+        instance = this;
+        long mss = System.currentTimeMillis();
 
         configuration = new Configuration();
         Log.info("Loaded the configuration!");
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         Log.info("Registered outgoing plugin channel for BungeeCord!");
-
-        registerCommandAndTab("fallbackreload", new FallbackReload(), true);
-        registerCommandAndTab("attemptconnect", new AttemptConnect(), true);
-        Log.info("Loaded the commands!");
 
         registerListener(new JoinLeaveEvent());
         registerListener(new ChatEvent());
@@ -103,20 +94,6 @@ public final class Main extends CyberAPI {
         } catch (Exception exception) {
             player.sendMessage(UChat.component("&e" + server + " &c(exception) -> &8" + exception));
             Log.error("&cAn error occurred whilst sending " + player.getName() + " to " + server + ": " + ChatColor.DARK_GRAY + exception);
-        }
-    }
-
-    public static void registerCommandAndTab(String name, Object commandExecutor, boolean withCommodore) {
-        try {
-            Main.getInstance().registerCommand(name, (CommandExecutor) commandExecutor);
-            if(withCommodore) {
-                if(CommodoreProvider.isSupported()) {
-                    Commodore.register(Bukkit.getPluginCommand(name), name);
-                }
-            }
-        } catch (Exception exception) {
-            BetterStackTraces.print(exception);
-            Log.error("An error occurred whilst loading the command /" + name + ": " + ChatColor.DARK_GRAY + exception);
         }
     }
 }
