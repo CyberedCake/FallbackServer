@@ -15,7 +15,7 @@ public class FallbackReload extends net.cybercake.cyberapi.spigot.server.command
         super(
                 newCommand("fallbackreload")
                         .setUsage("&6/&afallbackreload")
-                        .setDescription("Reloads the " + Main.getInstance().getPluginName() + " plugin's configuration.")
+                        .setDescription("Reloads the Fallback plugin's configuration.")
                         .setCommodore(true)
         );
     }

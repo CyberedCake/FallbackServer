@@ -6,3 +6,4 @@ prefix: FallbackServer
 authors: [ CyberedCake ]
 description: Put this in any Bungeecord network fallback server and it will attempt to automatically reconnect to the main server
 website: https://github.com/CyberedCake/FallbackServer/releases
+softdepend: [ LuckPerms ]

@@ -28,15 +28,16 @@ public final class Main extends CyberAPI {
 
     @Override
     public void onEnable() {
+        instance = this;
         startCyberAPI(Settings.builder()
                 .name("Fallback")
                 .prefix("Fallback")
                 .checkForUpdates(false)
                 .muteStartMessage(true)
                 .showPrefixInLogs(true)
+                .commandsPath("net.cybercake.fallback.commands")
                 .build()
         );
-        instance = this;
         long mss = System.currentTimeMillis();
 
         configuration = new Configuration();
