@@ -23,7 +23,7 @@ repositories {
 dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT'
 
-    implementation 'com.github.CyberedCake:CyberAPI:v3.0.3-spigot'
+    implementation 'com.github.CyberedCake:CyberAPI:51'
     implementation 'me.lucko:commodore:2.0'
 }
 
