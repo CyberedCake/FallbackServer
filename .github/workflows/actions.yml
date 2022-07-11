@@ -1,4 +1,4 @@
-name: VoidedSky - Fallback (Build)
+name: Fallback Server Actions
 
 on:
   push:
