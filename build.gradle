@@ -24,7 +24,7 @@ dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT'
 
     implementation 'com.github.CyberedCake.CyberAPI:spigot:58'
-    implementation 'me.lucko:commodore:2.0'
+    implementation 'me.lucko:commodore:2.2'
 }
 
 shadowJar {
