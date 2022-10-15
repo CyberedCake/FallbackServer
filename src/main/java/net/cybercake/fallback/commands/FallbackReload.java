@@ -1,11 +1,14 @@
 package net.cybercake.fallback.commands;
 
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.cybercake.cyberapi.spigot.basic.BetterStackTraces;
+import net.cybercake.cyberapi.spigot.chat.TabCompleteType;
 import net.cybercake.cyberapi.spigot.chat.UChat;
 import net.cybercake.cyberapi.spigot.server.commands.CommandInformation;
 import net.cybercake.fallback.Main;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -13,15 +16,20 @@ public class FallbackReload extends net.cybercake.cyberapi.spigot.server.command
 
     public FallbackReload() {
         super(
-                newCommand("fallbackreload")
-                        .setUsage("&6/&afallbackreload")
+                newCommand("fallbackReload")
+                        .setUsage("&6/&afallbackReload")
                         .setDescription("Reloads the Fallback plugin's configuration.")
-                        .setCommodore(true)
+                        .setPermission("fallbackserver.reload", UChat.chat("&cYou don't have permission to use this command!"))
+                        .setTabCompleteType(TabCompleteType.SEARCH)
+                        .setCommodore(
+                                LiteralArgumentBuilder.literal("fallbackReload")
+                                        .build()
+                        )
         );
     }
 
     @Override
-    public boolean perform(@net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull CommandSender sender, @net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull String command, CommandInformation information, String[] args) {
+    public boolean perform(@NotNull CommandSender sender, @NotNull String command, CommandInformation information, String[] args) {
         try {
             long mss = System.currentTimeMillis();
 
@@ -38,7 +46,7 @@ public class FallbackReload extends net.cybercake.cyberapi.spigot.server.command
     }
 
     @Override
-    public List<String> tab(@net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull CommandSender sender, @net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull String command, CommandInformation information, String[] args) {
+    public List<String> tab(@NotNull CommandSender sender, @NotNull String command, CommandInformation information, String[] args) {
         return null;
     }
 }

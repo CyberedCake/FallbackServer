@@ -1,7 +1,7 @@
 connectTo: "server"
 connectionInterval: 200 # in ticks, requires server restart
 
-spawnAt:
+spawnAt: # where to spawn the player
   world: "world"
   x: 0.00
   y: 100.00
@@ -9,8 +9,11 @@ spawnAt:
   yaw: 0.00
   pitch: 0.00
 
-disable:
+disable: # everything to disable
   joinLeaveMessages: true
   chat: true
   movement: true
   playerVisibility: true
+
+specificPlayers: # send different players to different servers
+  CyberedCake: "different-server"

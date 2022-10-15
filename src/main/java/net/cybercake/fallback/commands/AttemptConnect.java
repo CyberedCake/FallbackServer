@@ -1,5 +1,9 @@
 package net.cybercake.fallback.commands;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import net.cybercake.cyberapi.spigot.chat.TabCompleteType;
 import net.cybercake.cyberapi.spigot.chat.UChat;
 import net.cybercake.cyberapi.spigot.chat.UTabComp;
 import net.cybercake.cyberapi.spigot.server.commands.Command;
@@ -7,22 +11,31 @@ import net.cybercake.cyberapi.spigot.server.commands.CommandInformation;
 import net.cybercake.fallback.Main;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AttemptConnect extends Command {
 
     public AttemptConnect() {
         super(
-                newCommand("attemptconnect")
-                        .setUsage("&6/&aattemptconnect <server>")
+                newCommand("attemptConnect")
+                        .setUsage("&6/&aattemptConnect <server>")
                         .setDescription("Attempts to connect you to a certain server.")
-                        .setCommodore(true)
+                        .setPermission("fallbackserver.attemptconnect", UChat.chat("&cYou don't have permission to use this command!"))
+                        .setTabCompleteType(TabCompleteType.SEARCH)
+                        .setCommodore(
+                                LiteralArgumentBuilder.literal("attemptConnect")
+                                        .then(RequiredArgumentBuilder.argument("server", StringArgumentType.string()))
+                                        .build()
+                        )
         );
     }
 
     @Override
-    public boolean perform(@net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull CommandSender sender, @net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull String command, CommandInformation information, String[] args) {
+    public boolean perform(@NotNull CommandSender sender, @NotNull String command, CommandInformation information, String[] args) {
         if(!(sender instanceof Player player)) {
             sender.sendMessage(UChat.component("&cOnly in-game players can use this command!")); return true;
         }
@@ -39,9 +52,22 @@ public class AttemptConnect extends Command {
     }
 
     @Override
-    public List<String> tab(@net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull CommandSender sender, @net.cybercake.cyberapi.dependencies.annotations.jetbrains.NotNull String command, CommandInformation information, String[] args) {
-        if(args.length == 1) return UTabComp.tabCompletionsSearch(args[0], List.of(Main.getInstance().getConfiguration().getConnectTo()));
-        return UTabComp.emptyList;
+    public List<String> tab(@NotNull CommandSender sender, @NotNull String command, CommandInformation information, String[] args) {
+        List<String> returned = new ArrayList<>();
+        if(args.length == 1) {
+            returned.add(Main.getInstance().getConfiguration().getConnectTo());
+            returned.addAll(Main.getInstance().getConfiguration().getPlayersToServers().values().stream().map(Object::toString).toList());
+        }
+
+        if(String.join(" ", Arrays.copyOfRange(args, 0, args.length)).startsWith("\"")) { // add begin quote if it's added to suggestions
+            returned = new ArrayList<>(returned.stream().map(mappedItem -> "\"" + mappedItem).toList());
+            if(!String.join(" ", Arrays.copyOfRange(args, 0, args.length)).endsWith("\"")) { // add end quote if a begin quote exists
+                returned = new ArrayList<>(returned.stream().map(mappedItem -> mappedItem + "\"").toList());
+                returned.add(args[args.length-1] + "\"");
+            }
+        }
+
+        return returned;
     }
 
 }

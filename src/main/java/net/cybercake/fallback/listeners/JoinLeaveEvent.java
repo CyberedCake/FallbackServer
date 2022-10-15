@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.Map;
+
 public class JoinLeaveEvent implements Listener {
 
     @EventHandler
@@ -29,7 +31,7 @@ public class JoinLeaveEvent implements Listener {
         player.setGameMode(GameMode.SPECTATOR);
         player.teleport(configuration.getSpawn());
 
-        Main.getInstance().send(player, configuration.getConnectTo());
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> Main.getInstance().send(player, "$$configuration"), 1L); // run slightly delayed so we don't run into problems
     }
 
     @EventHandler
