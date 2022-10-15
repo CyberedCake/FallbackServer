@@ -25,7 +25,7 @@ public class SetCustomFallbackServer extends Command {
         super(
                 newCommand("setCustomFallbackServer")
                         .setDescription("Set's the server for yourself or everyone on the server.")
-                        .setUsage("&6/&esetCustomFallbackServer <myself|all> <server...>")
+                        .setUsage("&6/&esetCustomFallbackServer <myself|all|player> <server...>")
                         .setAliases("setServer", "setCustomServer")
                         .setPermission("fallbackserver.setcustom", UChat.chat("&cYou don't have permission to use this command!"))
                         .setTabCompleteType(TabCompleteType.SEARCH)
