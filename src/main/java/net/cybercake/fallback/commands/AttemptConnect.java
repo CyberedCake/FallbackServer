@@ -5,9 +5,8 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import net.cybercake.cyberapi.spigot.chat.TabCompleteType;
 import net.cybercake.cyberapi.spigot.chat.UChat;
-import net.cybercake.cyberapi.spigot.chat.UTabComp;
-import net.cybercake.cyberapi.spigot.server.commands.Command;
 import net.cybercake.cyberapi.spigot.server.commands.CommandInformation;
+import net.cybercake.cyberapi.spigot.server.commands.SpigotCommand;
 import net.cybercake.fallback.Main;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AttemptConnect extends Command {
+public class AttemptConnect extends SpigotCommand {
 
     public AttemptConnect() {
         super(

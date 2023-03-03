@@ -1,14 +1,13 @@
 package net.cybercake.fallback.commands;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import net.cybercake.cyberapi.spigot.basic.BetterStackTraces;
 import net.cybercake.cyberapi.spigot.chat.TabCompleteType;
 import net.cybercake.cyberapi.spigot.chat.UChat;
-import net.cybercake.cyberapi.spigot.server.commands.Command;
 import net.cybercake.cyberapi.spigot.server.commands.CommandInformation;
+import net.cybercake.cyberapi.spigot.server.commands.SpigotCommand;
 import net.cybercake.fallback.Main;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -16,17 +15,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class SetCustomFallbackServer extends Command {
+public class SetCustomFallbackServer extends SpigotCommand {
 
     public SetCustomFallbackServer() {
         super(
                 newCommand("setCustomFallbackServer")
                         .setDescription("Set's the server for yourself or everyone on the server.")
-                        .setUsage("&6/&esetCustomFallbackServer <myself|all|player> <server...>")
-                        .setAliases("setServer", "setCustomServer")
+                        .setUsage("&6/&esetcustomfallbackserver <myself|all|player> <server...>")
                         .setPermission("fallbackserver.setcustom", UChat.chat("&cYou don't have permission to use this command!"))
                         .setTabCompleteType(TabCompleteType.SEARCH)
                         .setCommodore(
