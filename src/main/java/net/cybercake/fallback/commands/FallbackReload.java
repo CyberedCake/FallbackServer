@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class FallbackReload extends net.cybercake.cyberapi.spigot.server.commands.Command {
+public class FallbackReload extends net.cybercake.cyberapi.spigot.server.commands.SpigotCommand {
 
     public FallbackReload() {
         super(

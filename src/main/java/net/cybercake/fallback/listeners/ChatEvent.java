@@ -1,11 +1,11 @@
 package net.cybercake.fallback.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.cybercake.cyberapi.spigot.server.listeners.SpigotListener;
 import net.cybercake.fallback.Main;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
-public class ChatEvent implements Listener {
+public class ChatEvent implements SpigotListener {
 
     @EventHandler
     public void onChat(AsyncChatEvent event) {

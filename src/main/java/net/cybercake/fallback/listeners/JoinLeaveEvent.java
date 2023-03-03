@@ -1,18 +1,16 @@
 package net.cybercake.fallback.listeners;
 
+import net.cybercake.cyberapi.spigot.server.listeners.SpigotListener;
 import net.cybercake.fallback.Configuration;
 import net.cybercake.fallback.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.Map;
-
-public class JoinLeaveEvent implements Listener {
+public class JoinLeaveEvent implements SpigotListener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {

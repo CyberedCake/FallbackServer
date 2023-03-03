@@ -1,12 +1,12 @@
 package net.cybercake.fallback.listeners;
 
+import net.cybercake.cyberapi.spigot.server.listeners.SpigotListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-public class DamageEvent implements Listener {
+public class DamageEvent implements SpigotListener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {

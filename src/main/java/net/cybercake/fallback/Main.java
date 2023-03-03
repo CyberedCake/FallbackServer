@@ -4,9 +4,6 @@ import net.cybercake.cyberapi.common.builders.settings.Settings;
 import net.cybercake.cyberapi.spigot.CyberAPI;
 import net.cybercake.cyberapi.spigot.chat.Log;
 import net.cybercake.cyberapi.spigot.chat.UChat;
-import net.cybercake.fallback.listeners.ChatEvent;
-import net.cybercake.fallback.listeners.JoinLeaveEvent;
-import net.cybercake.fallback.listeners.MoveEvent;
 import net.cybercake.fallback.tasks.AttemptToSend;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -30,7 +27,7 @@ public final class Main extends CyberAPI {
                 .checkForUpdates(false)
                 .muteStartMessage(true)
                 .showPrefixInLogs(true)
-                .commandsPath("net.cybercake.fallback.commands")
+                .mainPackage("net.cybercake.fallback")
                 .build()
         );
         long mss = System.currentTimeMillis();
@@ -41,21 +38,16 @@ public final class Main extends CyberAPI {
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         Log.info("Registered outgoing plugin channel for BungeeCord!");
 
-        registerListener(new JoinLeaveEvent());
-        registerListener(new ChatEvent());
-        registerListener(new MoveEvent());
-        Log.info("Loaded all listeners!");
-
         registerRunnable(new AttemptToSend(), getConfiguration().getConnectionInterval());
         Log.info("Started all tasks!");
 
         Log.info("&e&l-".repeat(Math.max(0, 60)));
         Log.info("&aSuccessfully enabled!");
-        Log.info(" &c┍ &fPlugin &6" + this.getName());
-        Log.info(" &c├ &fVersion &6" + this.getDescription().getVersion());
-        Log.info(" &c├ &fCreated By &6" + String.join(", ", this.getDescription().getAuthors()));
-        Log.info(" &c├ &fDescription &6" + (this.getDescription().getDescription().length() > 60 ? this.getDescription().getDescription().substring(0, 60) + "&8..." : this.getDescription().getDescription()));
-        Log.info(" &c┕ &fEnabled In &6" + (System.currentTimeMillis()-mss) + "ms");
+        Log.info(" &c\u250D &fPlugin &6" + this.getName());
+        Log.info(" &c\u251C &fVersion &6" + this.getDescription().getVersion());
+        Log.info(" &c\u251C &fCreated By &6" + String.join(", ", this.getDescription().getAuthors()));
+        Log.info(" &c\u251C &fDescription &6" + (this.getDescription().getDescription().length() > 60 ? this.getDescription().getDescription().substring(0, 60) + "&8..." : this.getDescription().getDescription()));
+        Log.info(" &c\u2515 &fEnabled In &6" + (System.currentTimeMillis()-mss) + "ms");
         Log.info(" ");
         Log.info("&7Occassionally check for updates at &b" + this.getDescription().getWebsite() + "&r&7!");
         Log.info("&e&l-".repeat(Math.max(0, 60)));
